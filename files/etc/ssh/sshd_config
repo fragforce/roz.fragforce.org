@@ -7,7 +7,7 @@ SyslogFacility AUTHPRIV
 PermitRootLogin no
 PubkeyAuthentication yes
 AuthorizedKeysFile %h/.ssh/authorized_keys
-PasswordAuthentication yes
+PasswordAuthentication no
 ChallengeResponseAuthentication no
 GSSAPIAuthentication yes
 GSSAPICleanupCredentials no
