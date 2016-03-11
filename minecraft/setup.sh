@@ -17,4 +17,4 @@ cd ${BASEDIR}/${SERVERDIR}
 wget ${MODPACK_URL}
 unzip ${MODPACK_FILE}
 
-chown -R ${USER} ${DIR}
+chown -R ${USER} ${BASEDIR}
