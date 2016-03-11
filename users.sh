@@ -16,8 +16,10 @@ id -u sbakker &>/dev/null || sudo useradd -u 1101 -G wheel sbakker
 sudo mkdir -p /home/sbakker/.ssh
 sudo cp users/sbakker/authorized_keys /home/sbakker/.ssh/authorized_keys
 sudo chown -R sbakker:sbakker /home/sbakker/.ssh
+sudo chmod 700 /home/sbakker/.ssh
 id -u mthomas &>/dev/null || sudo useradd -u 1102 -G wheel mthomas
 sudo mkdir -p /home/mthomas/.ssh
 sudo cp users/mthomas/authorized_keys /home/mthomas/.ssh/authorized_keys
 sudo chown -R mthomas:mthomas /home/mthomas/.ssh
+sudo chmod 700 /home/mthomas/.ssh
 echo "<<User accounts created>>"
