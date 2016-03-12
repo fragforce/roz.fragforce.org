@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
-yum install -y pam-devel git vim samba parted man xfsprogs wget tcpdump unzip screen
+echo "<<Updating System>>"
+sudo yum update -y
+echo "<<Installing Prereqs>>"
+sudo yum install -y epel-release
+echo "<<Installing Useful Tools>>"
+sudo yum install -y git vim samba parted man xfsprogs wget tcpdump unzip screen htop
 echo "<<Installing NTP>>"
-yum install -y ntp ntpdate ntp-doc
-chkconfig ntpd on
-service ntpd start
+sudo yum install -y ntp ntpdate ntp-doc
+sudo chkconfig ntpd on
+sudo service ntpd start
 echo "<<NTP Configured>>"
 echo "<<Installing Make Packages>>"
-yum install -y autoconf automake gcc libtool
+sudo yum install -y autoconf automake gcc libtool
 echo "<<Finished installing Make packages>>"
+echo "Disabling default firewall"
+sudo systemctl disable firewalld
+sudo systemctl stop firewalld
+echo "Firewall Crder 66'ed"
