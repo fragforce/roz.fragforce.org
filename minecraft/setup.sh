@@ -29,6 +29,14 @@ if ! sudo cmp -s ${CWD}/files/eula.txt ${SERVERDIR}/eula.txt; then
   echo "<<Updating eula.txt>>"
   sudo cp ${CWD}/files/eula.txt ${SERVERDIR}/eula.txt
 fi
+if ! sudo cmp -s ${CWD}/files/server.properties ${SERVERDIR}/server.properties; then
+  echo "<<Updating server.properties>>"
+  sudo cp ${CWD}/files/server.properties ${SERVERDIR}/server.properties
+fi
+if ! sudo cmp -s ${CWD}/files/ops.json ${SERVERDIR}/ops.json; then
+  echo "<<Updating ops.json>>"
+  sudo cp ${CWD}/files/ops.json ${SERVERDIR}/ops.json
+fi
 if ! sudo cmp -s ${CWD}/files/run.sh ${SERVERDIR}/run.sh; then
   echo "<<Updating run.sh>>"
   sudo cp ${CWD}/files/run.sh ${SERVERDIR}/run.sh;
