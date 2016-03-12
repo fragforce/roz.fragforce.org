@@ -6,6 +6,14 @@ CWD=`pwd`
 
 mkdir -p ${DDUT4DIR}
 cd ${DDUT4DIR}
+if [ ! -f ${CWD}/files/Engine.ini ]; then
+  echo "<<No Engine.ini found in ${CWD}/files, please copy the sample file and re-run>>"
+  exit 1
+elif grep -q ChangeMeNOW ${CWD}/files/Engine.ini; then
+  echo "<<Default RCON password present in ${CWD}/files/Engine.ini. Change the password and re-run>>"
+  exit 1
+fi
+
 if [ ! -f ${DDUT4DIR}/ut4wd.sh ]; then
   echo "<<Acquiring DDUT4>>"
   sudo wget https://github.com/DDRRE/ddut4/releases/download/ddut4-v04c1/ddut4.tgz
