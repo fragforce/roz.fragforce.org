@@ -1,20 +1,37 @@
-USER=minecraft
-BASEDIR=/ssd/minecraft
-SERVERDIR=fragforce
-JRE_URL="http://download.oracle.com/otn-pub/java/jdk/8u74-b02/jre-8u74-linux-x64.tar.gz"
-JRE_DOWNLOAD="--no-cookies --no-check-certificate --header"
-JRE_COOKIE="Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
-JRE_FILE="jre-8u74-linux-x64.tar.gz"
-MODPACK_URL="http://ftb.cursecdn.com/FTB2/modpacks/FTBInfinity/2_3_5/FTBInfinityServer.zip"
-MODPACK_FILE="FTBInfinityServer.zip"
-
-id -u ${USER} &>/dev/null || adduser ${USER}
-mkdir -p ${BASEDIR}/${SERVERDIR}
-cd ${DIR}
-wget ${JRE_DOWNLOAD} "${JRE_COOKIE}" ${JRE_URL}
-tar -xzvf ${JRE_FILE}
-cd ${BASEDIR}/${SERVERDIR}
-wget ${MODPACK_URL}
-unzip ${MODPACK_FILE}
-
-chown -R ${USER} ${BASEDIR}
+. ./settings.sh
+CWD=`pwd`
+if -u ${USER} &>/dev/null; then
+  echo "User ${USER} is missing, please run users.sh first"; 
+  exit 1;
+fi
+sudo mkdir -p ${BASEDIR}/${SERVERDIR}
+cd ${BASEDIR}
+if [ ! -d ${BASEDIR}/${JRE_FOLDER} ]; then
+  echo "<<Downloading JRE>>"
+  sudo wget ${JRE_DOWNLOAD} "${JRE_COOKIE}" ${JRE_URL}
+  sudo tar -xzvf ${JRE_FILE}
+else
+  echo "<<JRE already present>>"
+fi
+cd ${SERVERDIR}
+if [ ! -f ${SERVERDIR}/eula.txt ]; then
+  echo "<<Downloading Modpack>>"
+  sudo wget ${MODPACK_URL}
+  sudo unzip ${MODPACK_FILE}
+else
+  echo "<<Modpack already present>>"
+fi
+if ! sudo cmp -s ${CWD}/settings.sh ${SERVERDIR}/settings.sh; then
+  echo "<<Updating settings.sh>>"
+  sudo cp ${CWD}/settings.sh ${SERVERDIR}/settings.sh
+fi
+if ! sudo cmp -s ${CWD}/files/eula.txt ${SERVERDIR}/eula.txt; then
+  echo "<<Updating eula.txt>>"
+  sudo cp ${CWD}/files/eula.txt ${SERVERDIR}/eula.txt
+fi
+if ! sudo cmp -s ${CWD}/files/run.sh ${SERVERDIR}/run.sh; then
+  echo "<<Updating run.sh>>"
+  sudo cp ${CWD}/files/run.sh ${SERVERDIR}/run.sh;
+  sudo chmod a+x ${SERVERDIR}/run.sh
+fi
+sudo chown -R ${USER}:${GROUP} ${BASEDIR}
