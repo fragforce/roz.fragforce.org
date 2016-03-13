@@ -1,5 +1,6 @@
 . ./settings.sh
 CWD=`pwd`
+FILES=${CWD}/files
 if -u ${USER} &>/dev/null; then
   echo "User ${USER} is missing, please run users.sh first"; 
   exit 1;
@@ -25,21 +26,24 @@ if ! sudo cmp -s ${CWD}/settings.sh ${SERVERDIR}/settings.sh; then
   echo "<<Updating settings.sh>>"
   sudo cp ${CWD}/settings.sh ${SERVERDIR}/settings.sh
 fi
-if ! sudo cmp -s ${CWD}/files/eula.txt ${SERVERDIR}/eula.txt; then
+if ! sudo cmp -s ${FILES}/eula.txt ${SERVERDIR}/eula.txt; then
   echo "<<Updating eula.txt>>"
-  sudo cp ${CWD}/files/eula.txt ${SERVERDIR}/eula.txt
+  sudo cp ${FILES}/eula.txt ${SERVERDIR}/eula.txt
 fi
-if ! sudo cmp -s ${CWD}/files/server.properties ${SERVERDIR}/server.properties; then
+if ! sudo cmp -s ${FILES}/server.properties ${SERVERDIR}/server.properties; then
   echo "<<Updating server.properties>>"
-  sudo cp ${CWD}/files/server.properties ${SERVERDIR}/server.properties
+  sudo cp ${FILES}/server.properties ${SERVERDIR}/server.properties
 fi
-if ! sudo cmp -s ${CWD}/files/ops.json ${SERVERDIR}/ops.json; then
+if ! sudo cmp -s ${FILES}/ops.json ${SERVERDIR}/ops.json; then
   echo "<<Updating ops.json>>"
-  sudo cp ${CWD}/files/ops.json ${SERVERDIR}/ops.json
+  sudo cp ${FILES}/ops.json ${SERVERDIR}/ops.json
 fi
-if ! sudo cmp -s ${CWD}/files/run.sh ${SERVERDIR}/run.sh; then
+if ! sudo cmp -s ${FILES}/local/ftbu/config.json ${SERVERDIR}/local/ftbu/config.json
+  echo "<<Updating config.json>>"
+fi
+if ! sudo cmp -s ${FILES}/run.sh ${SERVERDIR}/run.sh; then
   echo "<<Updating run.sh>>"
-  sudo cp ${CWD}/files/run.sh ${SERVERDIR}/run.sh;
+  sudo cp ${FILES}/run.sh ${SERVERDIR}/run.sh;
   sudo chmod a+x ${SERVERDIR}/run.sh
 fi
 sudo chown -R ${USER}:${GROUP} ${BASEDIR}
