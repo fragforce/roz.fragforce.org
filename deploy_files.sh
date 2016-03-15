@@ -15,4 +15,5 @@ if ! sudo cmp -s files/etc/samba/smb.conf /etc/samba/smb.conf; then
   sudo chown root:root /etc/samba/smb.conf
   sudo chmod 644 /etc/samba/smb.conf
   sudo service smb restart
+  sudo chcon -t samba_share_t -R /files/
 fi
