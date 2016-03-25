@@ -18,6 +18,7 @@ if [ ! -f ${DDUT4DIR}/ut4wd.sh ]; then
   echo "<<Acquiring DDUT4>>"
   sudo wget https://github.com/DDRRE/ddut4/releases/download/ddut4-v04c1/ddut4.tgz
   sudo tar xzvf ddut4.tgz
+  sudo rm ddut4.tgz
   sudo cp ${CWD}/files/{CTF-Game.ini,ddut4.conf,DM-Game.ini,Engine.ini,HUB-Game.ini,HUB-Rules.ini} ${DDUT4DIR}
   sudo chown -R ${UNREALUSER}:services ${UNREALDIR}
 else
