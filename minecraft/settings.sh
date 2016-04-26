@@ -15,7 +15,7 @@ export JAVACMD="${JRE_BIN}/java"
 export JAVAOPTS="-server -Xms512M -Xmx2048M -XX:PermSize=256M -XX:+UseParNewGC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -jar FTBServer-1.7.10-1614.jar nogui"
 
 #Modpack Variables
-export MODPACK_URL="http://ftb.cursecdn.com/FTB2/modpacks/FTBInfinity/2_4_2/FTBInfinityServer.zip"
+export MODPACK_URL="http://ftb.cursecdn.com/FTB2/modpacks/FTBInfinity/2_5_0/FTBInfinityServer.zip"
 export MODPACK_FILE="FTBInfinityServer.zip"
 export MODPACK_DIR=${SERVERDIR}
 
