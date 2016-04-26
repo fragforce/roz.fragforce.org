@@ -20,9 +20,24 @@ if [ ! -f ${DDUT4DIR}/ut4wd.sh ]; then
   sudo tar xzvf ddut4.tgz
   sudo rm ddut4.tgz
   sudo cp ${CWD}/files/{CTF-Game.ini,ddut4.conf,DM-Game.ini,Engine.ini,HUB-Game.ini,HUB-Rules.ini} ${DDUT4DIR}
-  sudo chown -R ${UNREALUSER}:services ${UNREALDIR}
 else
   echo "<<DDUT4 Already present>>"
+fi
+if ! sudo cmp -s ${CWD}/files/HUB-Game.ini ${DDUT4DIR}/HUB-Game.ini; then
+  echo "<<Updating HUB-Game.ini>>"
+  sudo cp ${CWD}/files/HUB-Game.ini ${DDUT4DIR}/Hub-Game.ini;
+fi
+if ! sudo cmp -s ${CWD}/files/HUB-Rules.ini ${DDUT4DIR}/HUB-Rules.ini; then
+  echo "<<Updating HUB-Rules.ini>>"
+  sudo cp ${CWD}/files/HUB-Rules.ini ${DDUT4DIR}/Hub-Rules.ini;
+fi
+if ! sudo cmp -s ${CWD}/files/Engine.ini ${DDUT4DIR}/Engine.ini; then
+  sudo cp ${CWD}/files/Engine.ini ${DDUT4DIR}/Engine.ini;
+  echo "<<Updating Engine.ini>>"
+fi
+if ! sudo cmp -s ${CWD}/files/ddut4.conf ${DDUT4DIR}/ddut4.conf; then
+  sudo cp ${CWD}/files/ddut4.conf ${DDUT4DIR}/ddut4.conf;
+  echo "<<Updating ddut4.conf>>"
 fi
 if [ ! -d ${DDUT4DIR}/ut4-base ]; then
   echo "<<No UT4 Base dir, acquiring UT4>>"
@@ -31,3 +46,4 @@ if [ ! -d ${DDUT4DIR}/ut4-base ]; then
 else
   echo "<<UT4 Base dir present>>"
 fi
+sudo chown -R ${UNREALUSER}:services ${UNREALDIR}
