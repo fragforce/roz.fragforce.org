@@ -33,7 +33,7 @@ if ! sudo cmp -s users/mthomas/authorized_keys /home/mthomas/.ssh/authorized_key
   sudo chown -R mthomas:mthomas /home/mthomas/.ssh
   sudo chmod 700 /home/mthomas/.ssh
 fi
-if -u pmcintyr &>/dev/null || sudo useradd -u 1103 -G sudo,wheel,share pmcintyr
+id -u pmcintyr &>/dev/null || sudo useradd -u 1103 -G sudo,wheel,share pmcintyr
 if ! sudo cmp -s users/pmcintyr/authorized_keys /home/pmcintyr/.ssh/authorized_kes; then
   sudo mkdir -p /home/pmcintyr/.ssh
   sudo cp users/pmcintyr/authorized_keys /home/pmcintyr/.ssh/authorized_keys
